@@ -36,8 +36,9 @@ dependencies {
     // CardView
     implementation "androidx.cardview:cardview:1.0.0"
     // Material Design
-    implementation "com.google.android.material:material:1.2.0"
+    implementation "com.google.android.material:material:1.2.1"
 
+    //android lifeCycle
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     // LiveData
