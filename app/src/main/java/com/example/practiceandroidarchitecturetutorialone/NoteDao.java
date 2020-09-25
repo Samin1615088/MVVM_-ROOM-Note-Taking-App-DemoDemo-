@@ -23,6 +23,6 @@ public interface NoteDao {
     @Query("DELETE FROM Note_table")
     void deleteAll();
 
-    @Query("SELECT * FROM note_table ORDER BY id DESC")
-    LiveData<List<Note>> allNotes();
+    @Query("SELECT * FROM note_table ORDER BY priority DESC")
+    LiveData<List<Note>> getAllNotes();    //Room generates all the necessary body code of this abstract method
 }
