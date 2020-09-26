@@ -2,6 +2,7 @@ package com.example.practiceandroidarchitecturetutorialone;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -20,6 +21,7 @@ public abstract class NoteDatabase extends RoomDatabase {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), NoteDatabase.class, "note_database")
                     .fallbackToDestructiveMigration()   //will delete the existing database while we increment the database version
+                    .addCallback(roomCallback)
                     .build();
         }
         return instance;
@@ -30,6 +32,8 @@ public abstract class NoteDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             new PopulateDbAsyncTask(instance).execute();
+            Log.v("1a", "roomCallback");
+
         }
     };
 
@@ -37,8 +41,9 @@ public abstract class NoteDatabase extends RoomDatabase {
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private NoteDao noteDao;
 
-        public PopulateDbAsyncTask(NoteDatabase db) {
+        private PopulateDbAsyncTask(NoteDatabase db) {
             noteDao = db.noteDao();
+            Log.v("1a", "PopulateDbAsyncTask");
         }
 
         @Override
@@ -46,6 +51,7 @@ public abstract class NoteDatabase extends RoomDatabase {
             noteDao.insert(new Note("Title 1", "Description 1", 1));
             noteDao.insert(new Note("Title 2", "Description 2", 2));
             noteDao.insert(new Note("Title 3", "Description 3", 3));
+            Log.v("1a", "doInBackground");
             return null;
         }
     }
