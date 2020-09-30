@@ -56,4 +56,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         this.notes = notes;
         notifyDataSetChanged(); //not best solution  as we cannot use some animation. we will change it later
     }
+
+    public Note getNote(int position){
+        return notes.get(position);
+    }
 }
